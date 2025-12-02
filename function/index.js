@@ -21,7 +21,7 @@ const browserLaunchArgs = {
 
 async function scrape(url, browserName, extraLaunchArgs) {
     let browser = null;
-    const newOutages = [];
+    const data = [];
     
     try {
         browser = await browserTypes[browserName].launch({
@@ -35,7 +35,7 @@ async function scrape(url, browserName, extraLaunchArgs) {
         await page.goto(url);
 
         const title = await page.title();
-        newOutages.push(title);
+        data.push(title);
     }
     catch (e) {
         console.error('Error with scraping script:', e);
@@ -44,7 +44,7 @@ async function scrape(url, browserName, extraLaunchArgs) {
         if (browser) {
             await browser.close();
         }
-        return newOutages;
+        return data;
     }
 }
 
